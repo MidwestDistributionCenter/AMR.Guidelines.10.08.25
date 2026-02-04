@@ -350,6 +350,20 @@ h2 {
 <div id="screen-shutdown" class="screen hidden">
   <button onclick="goToScreen('screen-technician')">← Back to Menu</button>
   <h2>AMR Shut Down</h2>
+  
+   <!-- Toggle buttons -->
+  <div style="margin: 15px 0;">
+    <button id="btn-shutdown-normal" onclick="showShutdownSection('normal')">
+      Normal Shut Down
+    </button>
+    <button id="btn-shutdown-charger" onclick="showShutdownSection('charger')">
+      AMR Connected to Charger
+    </button>
+  </div>
+  
+  <div id="shutdown-normal" class="shutdown-section">
+    <h3 style="margin-top: 10px;">Normal Shut Down (AMR NOT connected to charger)</h3>
+
 
   <div class="step"><strong>Step 1:</strong> In Kuka Fleet, in Settings tab, turn off <strong>Auto park mission</strong> then click <strong>Update</strong>
   <br><img src="SD1.png" alt="Autopark" style="margin-top: 8px; width: 500px;"></div>
@@ -371,6 +385,31 @@ h2 {
  <br><img src="SD6.png" alt="Autopark" style="margin-top: 8px; width: 300px;"></div>
 </div>
 
+
+<div id="shutdown-charger" class="shutdown-section hidden">
+    <h3 style="margin-top: 10px;">AMR Shut Down (AMRs are connected to chargers)</h3>
+
+    <div class="step"><strong>Scenario:</strong> When all AMRs already connected to the chargers during Auto-charging
+ time</div>
+
+    <div class="step"><strong>Step 1:</strong> In KUKA Fleet → Settings tab → turn off <strong>Auto park mission</strong> → click <strong>Update</strong>
+      <br><img src="SD1.png" alt="Autopark" style="margin-top: 8px; width: 500px;">
+    </div>
+    
+     <div class="step"><strong>Step 2:</strong> Cancel any queued charge jobs (In a case where all 6 AMRs don't go to charge - the charge jobs are still just sitting queued, these will need to be canceled before the active ones are so that they dont get picked up by another AMR. )</div>
+
+<div class="step">
+  <strong>Step 3:</strong> Cancel any active charge jobs.
+  <br><img src="AC1.png" alt="Autopark" style="margin-top: 8px; width: 500px;">
+  <br><img src="AC2.png" alt="Autopark" style="margin-top: 8px; width: 500px;">
+</div>
+
+<div class="step">
+  <strong>Step 4:</strong> AMRs will move to the approach nodes, press and release the standby button the AMR will shutdown.
+  <br><img src="AC3.png" alt="Autopark" style="margin-top: 8px; width: 500px;">
+</div>
+ 
+ 
 <div id="screen-startup" class="screen hidden">
   <button onclick="goToScreen('screen-technician')">← Back to Menu</button>
   <h2>AMR Start Up</h2>
@@ -687,6 +726,36 @@ h2 {
 
   </div>
 </div>
+
+
+
+
+<script>
+  function showShutdownSection(which) {
+    const normal = document.getElementById("shutdown-normal");
+    const charger = document.getElementById("shutdown-charger");
+
+    const btnNormal = document.getElementById("btn-shutdown-normal");
+    const btnCharger = document.getElementById("btn-shutdown-charger");
+
+    // hide both first
+    normal.classList.add("hidden");
+    charger.classList.add("hidden");
+
+    // clear button highlight
+    btnNormal.style.background = "";
+    btnCharger.style.background = "";
+
+    // show selected
+    if (which === "normal") {
+      normal.classList.remove("hidden");
+      btnNormal.style.background = "#d0e6ff";
+    } else {
+      charger.classList.remove("hidden");
+      btnCharger.style.background = "#d0e6ff";
+    }
+  }
+</script>
 
 <script>
 function showOperationTab(tab) {
