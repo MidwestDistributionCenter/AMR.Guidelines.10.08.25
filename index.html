@@ -153,9 +153,9 @@ h2 {
     <div class="guide-box" onclick="goToScreen('screen-shutdown')">
       <h3>AMR Shut Down</h3>
     </div>
-<div class="guide-box" onclick="goToScreen('screen-jobcancel')">
+    <div class="guide-box" onclick="goToScreen('screen-jobcancel')">
       <h3>Cancel A Job</h3>
-    </div>
+       </div>
 <div class="guide-box" onclick="goToScreen('screen-brake')">
       <h3>How to brake release the AMR</h3>
     </div>
@@ -331,6 +331,7 @@ h2 {
  <br><img src="L10.png" alt="Autopark" style="margin-top: 8px; width: 300px;"></div>
 </div>
 
+
 <div id="screen-intersection" class="screen hidden">
   <button onclick="goToScreen('screen-technician')" style="margin-bottom: 30px;">← Back to Menu</button>
        <h3>AMR faulted by another AMR (Intersection) </h3>
@@ -347,23 +348,73 @@ h2 {
 </div>
 
 
+<div id="screen-jobcancel" class="screen hidden">
+  <button onclick="goToScreen('screen-technician')" style="margin-bottom: 30px;">← Back to Menu</button>
+  <h3>Cancel A Job</h3>
+  <div class="step"><strong>NOTE: Other methods of debugging issues should be attempted before canceling a job, and DO NOT use the Force Cancel command! This can lock up the server.</strong></div>
+ <div class="guide-grid">
+    <div class="guide-box blue-box" onclick="goToScreen('screen-cancel-a')">
+      <h3>AMR does NOT have a container</h3>
+    </div>
+    <div class="guide-box blue-box" onclick="goToScreen('screen-cancel-b')">
+      <h3>AMR has a container</h3>
+    </div>
+  </div>
+</div>
+ 
+<div id="screen-cancel-a" class="screen hidden">
+  <button onclick="goToScreen('screen-jobcancel')" style="margin-bottom: 30px;">← Back to Job Cancel Menu</button>
+  <h2><img src="JC2.png" alt="No Container Icon" 
+       style="height: 60px; vertical-align: middle; margin-right: 10px;">AMR does NOT have a container</h2>
+  <div class="step"><strong>Step 1:</strong> Go to Job Info > Job Board.
+<br><img src="R2.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
+  <div class="step"><strong>Step 2:</strong> Find the job attached to the Robot ID that needs to be canceled.</div>
+  <div class="step"><strong>Step 3:</strong> Click on the job in the Job Board.
+<br><img src="R3.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
+  <div class="step"><strong>Step 4:</strong> In the window that appears, click Cancel Workflow
+<br><img src="R4.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
+  <div class="step"><strong>Step 5:</strong> Select Complete job manually in the window that appears and click OK.
+<br><img src="R5.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
+ <div class="step"><strong>Step 6:</strong> Since there was no container attached to the AMR, after successfully canceling, it will automatically pick up the next job in the queue or move to its park location.</div>
+</div>
+
+
+<div id="screen-cancel-b" class="screen hidden">
+  <button onclick="goToScreen('screen-jobcancel')" style="margin-bottom: 30px;">← Back to Job Cancel Menu</button>
+  <h2><img src="JC1.png" alt=" Container Icon" 
+       style="height: 60px; vertical-align: middle; margin-right: 10px;">AMR have a container</h2>
+  <div class="step"><strong>Step 1:</strong> Go to Job Info > Job Board.
+<br><img src="R2.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
+  <div class="step"><strong>Step 2:</strong> Find the job attached to the Robot ID that needs to be canceled.</div>
+  <div class="step"><strong>Step 3:</strong> Click on the job in the Job Board.
+<br><img src="R3.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
+  <div class="step"><strong>Step 4:</strong> In the window that appears, click Cancel Workflow
+<br><img src="R4.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
+  <div class="step"><strong>Step 5:</strong> Select Complete job manually in the window that appears and click OK.
+<br><img src="R5.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
+ <div class="step"><strong>Step 6:</strong> Since the AMR had a container attached, it will sit idle where it is currently at. The rest of the job will need to be manually completed.</div>
+<div class="step"><strong>Step 7:</strong> Go to Map Monitor and click on the AMR that the job was canceled on.</div>
+<div class="step"><strong>Step 8:</strong> Use the Move action command to move the AMR to the drop off node.
+<br><img src="SD3.png" alt="Cancel" style="margin-top: 8px; width: 500px;">
+<br><img src="SD4.png" alt="Cancel" style="margin-top: 8px; width: 800px;"></div>
+<div class="step"><strong>Step 9:</strong>Use the Drop action command to drop the container on the drop off node.
+<br><img src="R6.png" alt="Cancel" style="margin-top: 8px; width: 500px;">
+<br><img src="R7.png" alt="Cancel" style="margin-top: 8px; width: 800px;"></div>
+<div class="step"><strong>Step 10:</strong>The AMR will lower the lift on the selected node and the container will be detached from the AMR. After detaching the container from the AMR, it should automatically begin the next job in the queue or move to its park location.</div>
+<div class="step"><strong>Step 11:</strong>Find the Container ID associated with the canceled job – this can be done from either the Job Board or Map Monitor.
+<br><img src="R8.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
+<div class="step"><strong>Step 12:</strong>Go to Container Info > Container List and find the container ID in the list.
+<br><img src="R9.png" alt="Cancel" style="margin-top: 8px; width: 500px;">
+<br><img src="R10.png" alt="Cancel" style="margin-top: 8px; width: 800px;"></div>
+<div class="step"><strong>Step 13:</strong>Click Leave to remove the container from the map.
+<br><img src="R11.png" alt="Cancel" style="margin-top: 8px; width: 800px;"></div>
+<div class="step"><strong>Step 14:</strong>Click Delete to remove the container from the system.</div>
+</div>
+
+
 <div id="screen-shutdown" class="screen hidden">
   <button onclick="goToScreen('screen-technician')">← Back to Menu</button>
   <h2>AMR Shut Down</h2>
-  
-   <!-- Toggle buttons -->
-  <div style="margin: 15px 0;">
-    <button id="btn-shutdown-normal" onclick="showShutdownSection('normal')">
-      Normal Shut Down
-    </button>
-    <button id="btn-shutdown-charger" onclick="showShutdownSection('charger')">
-      All AMRs connected to the chargers
-    </button>
-  </div>
-  
-  <div id="shutdown-normal" class="shutdown-section">
-    <h3 style="margin-top: 10px;">Normal Shut Down (AMR NOT connected to charger)</h3>
-
 
   <div class="step"><strong>Step 1:</strong> In Kuka Fleet, in Settings tab, turn off <strong>Auto park mission</strong> then click <strong>Update</strong>
   <br><img src="SD1.png" alt="Autopark" style="margin-top: 8px; width: 500px;"></div>
@@ -385,31 +436,6 @@ h2 {
  <br><img src="SD6.png" alt="Autopark" style="margin-top: 8px; width: 300px;"></div>
 </div>
 
-
-<div id="shutdown-charger" class="shutdown-section hidden">
-    <h3 style="margin-top: 10px;">AMR Shut Down (AMRs are connected to chargers)</h3>
-
-    <div class="step"><strong>Scenario:</strong> When all AMRs already connected to the chargers during Auto-charging time 
-      <br><img src="AC0.png" alt="Autopark" style="margin-top: 8px; width: 500px;"></div>
-
-    <div class="step"><strong>Step 1:</strong> In KUKA Fleet → Settings tab → turn off <strong>Auto park mission</strong> → click <strong>Update</strong>
-      <br><img src="SD1.png" alt="Autopark" style="margin-top: 8px; width: 500px;">
-    </div>
-    
-     <div class="step"><strong>Step 2:</strong> Cancel any queued charge jobs (In a case where all 6 AMRs don't go to charge - the charge jobs are still just sitting queued, these will need to be canceled before the active ones are so that they dont get picked up by another AMR. ) </div>
-
-<div class="step">
-  <strong>Step 3:</strong> Cancel any active charge jobs.
-  <br><img src="AC1.png" alt="Autopark" style="margin-top: 8px; width: 650px;">
-  <br><img src="AC2.png" alt="Autopark" style="margin-top: 8px; width: 500px;">
-</div>
-
-<div class="step">
-  <strong>Step 4:</strong> AMRs will move to the approach nodes, press and release the standby button the AMR will shutdown.
-  <br><img src="AC3.png" alt="Autopark" style="margin-top: 8px; width: 500px;">
-</div>
- 
- 
 <div id="screen-startup" class="screen hidden">
   <button onclick="goToScreen('screen-technician')">← Back to Menu</button>
   <h2>AMR Start Up</h2>
@@ -495,71 +521,8 @@ h2 {
   <div class="step"><strong>Step 3:</strong>Manually move AMR back to the approach node (orange sticker on the floor)</div>
   <div class="step"><strong>Step 4:</strong>Relocalize the AMR </div>
   <div class="step"><strong>Step 5:</strong> Once the position is set and has been updated on the AMR, click </strong>Restore AutoMode</strong> on the controller tab to turn the AMR back online. </div>
-</div>
-
-<div id="screen-jobcancel" class="screen hidden">
-  <button onclick="goToScreen('screen-technician')" style="margin-bottom: 30px;">← Back to Menu</button>
-  <h3>Cancel A Job</h3>
-  <div class="step"><strong>NOTE: Other methods of debugging issues should be attempted before canceling a job, and DO NOT use the Force Cancel command! This can lock up the server.</strong></div>
- <div class="guide-grid">
-    <div class="guide-box blue-box" onclick="goToScreen('screen-cancel-a')">
-      <h3>AMR does NOT have a container</h3>
-    </div>
-    <div class="guide-box blue-box" onclick="goToScreen('screen-cancel-b')">
-      <h3>AMR has a container</h3>
-    </div>
-  </div>
-</div>
  
-<div id="screen-cancel-a" class="screen hidden">
-  <button onclick="goToScreen('screen-jobcancel')" style="margin-bottom: 30px;">← Back to Job Cancel Menu</button>
-  <h2><img src="JC2.png" alt="No Container Icon" 
-       style="height: 60px; vertical-align: middle; margin-right: 10px;">AMR does NOT have a container</h2>
-  <div class="step"><strong>Step 1:</strong> Go to Job Info > Job Board.
-<br><img src="R2.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
-  <div class="step"><strong>Step 2:</strong> Find the job attached to the Robot ID that needs to be canceled.</div>
-  <div class="step"><strong>Step 3:</strong> Click on the job in the Job Board.
-<br><img src="R3.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
-  <div class="step"><strong>Step 4:</strong> In the window that appears, click Cancel Workflow
-<br><img src="R4.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
-  <div class="step"><strong>Step 5:</strong> Select Complete job manually in the window that appears and click OK.
-<br><img src="R5.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
- <div class="step"><strong>Step 6:</strong> Since there was no container attached to the AMR, after successfully canceling, it will automatically pick up the next job in the queue or move to its park location.</div>
 </div>
-
-
-<div id="screen-cancel-b" class="screen hidden">
-  <button onclick="goToScreen('screen-jobcancel')" style="margin-bottom: 30px;">← Back to Job Cancel Menu</button>
-  <h2><img src="JC1.png" alt=" Container Icon" 
-       style="height: 60px; vertical-align: middle; margin-right: 10px;">AMR have a container</h2>
-  <div class="step"><strong>Step 1:</strong> Go to Job Info > Job Board.
-<br><img src="R2.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
-  <div class="step"><strong>Step 2:</strong> Find the job attached to the Robot ID that needs to be canceled.</div>
-  <div class="step"><strong>Step 3:</strong> Click on the job in the Job Board.
-<br><img src="R3.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
-  <div class="step"><strong>Step 4:</strong> In the window that appears, click Cancel Workflow
-<br><img src="R4.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
-  <div class="step"><strong>Step 5:</strong> Select Complete job manually in the window that appears and click OK.
-<br><img src="R5.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
- <div class="step"><strong>Step 6:</strong> Since the AMR had a container attached, it will sit idle where it is currently at. The rest of the job will need to be manually completed.</div>
-<div class="step"><strong>Step 7:</strong> Go to Map Monitor and click on the AMR that the job was canceled on.</div>
-<div class="step"><strong>Step 8:</strong> Use the Move action command to move the AMR to the drop off node.
-<br><img src="SD3.png" alt="Cancel" style="margin-top: 8px; width: 500px;">
-<br><img src="SD4.png" alt="Cancel" style="margin-top: 8px; width: 800px;"></div>
-<div class="step"><strong>Step 9:</strong>Use the Drop action command to drop the container on the drop off node.
-<br><img src="R6.png" alt="Cancel" style="margin-top: 8px; width: 500px;">
-<br><img src="R7.png" alt="Cancel" style="margin-top: 8px; width: 800px;"></div>
-<div class="step"><strong>Step 10:</strong>The AMR will lower the lift on the selected node and the container will be detached from the AMR. After detaching the container from the AMR, it should automatically begin the next job in the queue or move to its park location.</div>
-<div class="step"><strong>Step 11:</strong>Find the Container ID associated with the canceled job – this can be done from either the Job Board or Map Monitor.
-<br><img src="R8.png" alt="Cancel" style="margin-top: 8px; width: 500px;"></div>
-<div class="step"><strong>Step 12:</strong>Go to Container Info > Container List and find the container ID in the list.
-<br><img src="R9.png" alt="Cancel" style="margin-top: 8px; width: 500px;">
-<br><img src="R10.png" alt="Cancel" style="margin-top: 8px; width: 800px;"></div>
-<div class="step"><strong>Step 13:</strong>Click Leave to remove the container from the map.
-<br><img src="R11.png" alt="Cancel" style="margin-top: 8px; width: 800px;"></div>
-<div class="step"><strong>Step 14:</strong>Click Delete to remove the container from the system.</div>
-</div>
-
 
 
 <div id="screen-brake" class="screen hidden">
@@ -655,8 +618,8 @@ h2 {
 
   <!-- Tab Content -->
   <div id="tab-content-team" class="tab-section hidden">
-    <div class="step"><strong>1.</strong> AMR 1 & AMR 2 are assigned to Team 5. </div>
-    <div class="step"><strong>2.</strong> AMR 5 & AMR 6 are assigned to Team 6.</div>
+    <div class="step"><strong>1.</strong> AMR 1 & AMR 2 are assigned to Team 6. </div>
+    <div class="step"><strong>2.</strong> AMR 5 & AMR 6 are assigned to Team 5.</div>
     <div class="step"><strong>3.</strong> AMR 3 & AMR 4 are shared between Team 5 and Team 6.</div>
 <div class="step"><strong>IMPORTANT NOTE.</strong> Each AMR is linked to specific pickup and drop-off racks that correspond to the assigned team’s area.
 ⚠️ Note: AMRs cannot be forced to complete jobs for an unassigned team. If the job is not designated for that AMR’s configured team, it will not run.</div>
@@ -677,20 +640,18 @@ h2 {
   <!-- Shift 1 -->
   <div id="shift1Steps" class="hidden">
     <div class="step"><strong>1.</strong> During the day, Auto Charge is enabled. All AMRs will move to the charging station during breaks.</div>
-    <div class="step"><strong>2.</strong>At the end of the day, if the AMRs are already above 80% SOC, do not need to plug them in; simply power them off.</div>
+    <div class="step"><strong>2.</strong>At the end of the day, if the AMRs are already above 80–85% SOC, do not need to plug them in; simply power them off.</div>
   </div>
 
   <!-- Shift 2 -->
   <div id="shift2Steps" class="hidden">
-    <div class="step"><strong>1.</strong> During your shift, Auto Charge is enabled. All AMRs will move to the charging station during breaks.</div>
-    <div class="step"><strong>2.</strong>At the end of the day (if finish early before 11:00 PM), if the AMRs are already above 80% SOC, do not need to plug them in; simply power them off.</div>
-  </div>
-
+    <div class="step"><strong>1.</strong> TBD</div>
+     </div>
 
   <!-- Shift 3 -->
   <div id="shift3Steps" class="hidden">
-    <div class="step"><strong>1.</strong> During your shift, Auto Charge is enabled. All AMRs will move to the charging station during breaks </div> 
-    <div class="step"><strong>2.</strong> At the end of the day (if finish early before 7:00 AM), if the AMRs are already above 80% SOC, do not need to plug them in; simply power them off.</div>
+    <div class="step"><strong>1.</strong> Currently, AMRs 1, 2, and 3 are configured for auto charging during break periods. </div> 
+    <div class="step"><strong>2.</strong> AMR 4 is not set up to auto charge at this time. Please ensure that only AMRs 1, 2, and 3 are used during breaks to maintain proper charging behavior.</div>
   
 </div>
 </div>
@@ -726,36 +687,6 @@ h2 {
 
   </div>
 </div>
-
-
-
-
-<script>
-  function showShutdownSection(which) {
-    const normal = document.getElementById("shutdown-normal");
-    const charger = document.getElementById("shutdown-charger");
-
-    const btnNormal = document.getElementById("btn-shutdown-normal");
-    const btnCharger = document.getElementById("btn-shutdown-charger");
-
-    // hide both first
-    normal.classList.add("hidden");
-    charger.classList.add("hidden");
-
-    // clear button highlight
-    btnNormal.style.background = "";
-    btnCharger.style.background = "";
-
-    // show selected
-    if (which === "normal") {
-      normal.classList.remove("hidden");
-      btnNormal.style.background = "#d0e6ff";
-    } else {
-      charger.classList.remove("hidden");
-      btnCharger.style.background = "#d0e6ff";
-    }
-  }
-</script>
 
 <script>
 function showOperationTab(tab) {
@@ -953,6 +884,3 @@ function showNextStep() {
 </script>
 </body>
 </html>
-
-
-
