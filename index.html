@@ -171,6 +171,9 @@ h2 {
  <div class="guide-box" onclick="goToScreen('screen-intersection')">
       <h3>AMR faulted by another AMR (Intersection) </h3>
     </div>
+<div class="guide-box" onclick="goToScreen('screen-0battery')">
+  <h3>AMR Shut Itself Off at 0% Battery Level</h3>
+</div>
 <div class="guide-box" onclick="goToScreen('screen-shippingdock')">
   <h3>AMR faulted at shipping dock</h3>
 </div>
@@ -180,6 +183,25 @@ h2 {
   </div>
 </div>
 
+
+<div id="screen-0battery" class="screen hidden">
+  <button onclick="goToScreen('screen-technician')">← Back to Menu</button>
+  <h2>AMR Shut Itself Off at 0% Battery Level</h2>
+
+  <div class="step"><strong>Details: </strong> The AMR may automatically power down when the battery level reaches 0%. This is typically related to battery calibration and not a hardware failure.</div>
+  <div class="step"><strong>Step 1:</strong> AIf the AMR has a pallet loaded, have a forklift safely remove the pallet.Then manually move the AMR to the charging area using the hand truck.</div>
+  <div class="step"><strong>Step 2:</strong> Unplug one of the charging station power outlets to connect the manual charger (black charging box), and plug the manual charger to the AMR port.
+  <br><img src="CP1.png" alt="Virtual" style="margin-top: 8px; width: 500px;"></div>
+  <div class="step"><strong>Step 3:</strong> After plugging in, press the standby button to power on the AMR so its location updates on the system map.</div>
+  <div class="step"><strong>Step 4:</strong> If AMR Has a Virtual Container, charge the AMR until the battery level is high enough to power on and operate. Then cancel the active job and drop the container somewhere. </div>
+  <div class="step"><strong>Step 5:</strong> After the container is cleared and the AMR has no active job:
+→ Brake release or place the AMR in Debugging Mode.
+→ Move the AMR back to the charging area.
+→ Reconnect the manual charger.
+→ Charge continuously to 100% without interruption.</div>
+<div class="step"><strong>Step 6:</strong> Once fully charged, return the AMR to normal operation.
+If leaving before charging is complete, you can power off the AMR while keeping the manual charger connected.</div>
+</div>
 
 <div id="screen-container" class="screen hidden">
   <button onclick="goToScreen('screen-technician')">← Back to Menu</button>
@@ -415,7 +437,18 @@ h2 {
 <div id="screen-shutdown" class="screen hidden">
   <button onclick="goToScreen('screen-technician')">← Back to Menu</button>
   <h2>AMR Shut Down</h2>
-
+  
+   <!-- Tabs -->
+  <div id="shutdown-tab-buttons" style="margin-top: 15px; margin-bottom: 10px;">
+    <button onclick="showShutdownTab('normal')" id="tab-shutdown-normal" style="padding: 10px;">
+      Normal process
+    </button>
+    <button onclick="showShutdownTab('charging')" id="tab-shutdown-charging" style="padding: 10px; margin-left: 10px;">
+      AMRs are in Auto-charging mode
+    </button>
+  </div>
+  
+ <div id="tab-content-shutdown-normal" class="tab-section hidden">
   <div class="step"><strong>Step 1:</strong> In Kuka Fleet, in Settings tab, turn off <strong>Auto park mission</strong> then click <strong>Update</strong>
   <br><img src="SD1.png" alt="Autopark" style="margin-top: 8px; width: 500px;"></div>
   <div class="step"><strong>Step 2:</strong> In Kuka Fleet, click an AMR in the map (you can start with AMR 1)
@@ -435,6 +468,19 @@ h2 {
  <div class="step"><strong>Step 5:</strong>When the AMR arrives to the charging nodes, press and release the standby button the AMR will shutdown.
  <br><img src="SD6.png" alt="Autopark" style="margin-top: 8px; width: 300px;"></div>
 </div>
+
+<!-- Tab Content: Already Charging -->
+  <div id="tab-content-shutdown-charging" class="tab-section hidden">
+  <div class="step"><strong>Step 1:</strong> In Kuka Fleet, in Settings tab, turn off <strong>Auto park mission</strong> then click <strong>Update</strong>
+  <br><img src="SD1.png" alt="Autopark" style="margin-top: 8px; width: 500px;"></div>
+    <div class="step"><strong>Step 2:</strong> Since the AMR is already connected to the charger, cancel the active mission: click the AMR on the map → open Advanced Debugging → click <strong>Cancel</strong>
+      <br><img src="SC1.png" alt="Standby" style="margin-top: 8px; width: 300px;">
+    </div>
+    <div class="step"><strong>Step 3:</strong> The AMR will move to its charging node. Once it arrives, press and release the Standby button to shut it down.</div>
+  </div>
+</div>
+
+
 
 <div id="screen-startup" class="screen hidden">
   <button onclick="goToScreen('screen-technician')">← Back to Menu</button>
@@ -618,8 +664,8 @@ h2 {
 
   <!-- Tab Content -->
   <div id="tab-content-team" class="tab-section hidden">
-    <div class="step"><strong>1.</strong> AMR 1 & AMR 2 are assigned to Team 6. </div>
-    <div class="step"><strong>2.</strong> AMR 5 & AMR 6 are assigned to Team 5.</div>
+    <div class="step"><strong>1.</strong> AMR 1 & AMR 2 are assigned to Team 5. </div>
+    <div class="step"><strong>2.</strong> AMR 5 & AMR 6 are assigned to Team 6.</div>
     <div class="step"><strong>3.</strong> AMR 3 & AMR 4 are shared between Team 5 and Team 6.</div>
 <div class="step"><strong>IMPORTANT NOTE.</strong> Each AMR is linked to specific pickup and drop-off racks that correspond to the assigned team’s area.
 ⚠️ Note: AMRs cannot be forced to complete jobs for an unassigned team. If the job is not designated for that AMR’s configured team, it will not run.</div>
@@ -639,19 +685,20 @@ h2 {
 
   <!-- Shift 1 -->
   <div id="shift1Steps" class="hidden">
-    <div class="step"><strong>1.</strong> During the day, Auto Charge is enabled. All AMRs will move to the charging station during breaks.</div>
-    <div class="step"><strong>2.</strong>At the end of the day, if the AMRs are already above 80–85% SOC, do not need to plug them in; simply power them off.</div>
+    <div class="step"><strong>1.</strong> During your shift, Auto Charge is enabled. All AMRs will move to the charging station during breaks.</div>
+    <div class="step"><strong>2.</strong> When team finishes early, at the end of your shift, if the AMRs are already above 80–85% SOC, do not need to plug them in; simply power them off.</div>
   </div>
 
   <!-- Shift 2 -->
   <div id="shift2Steps" class="hidden">
-    <div class="step"><strong>1.</strong> TBD</div>
+    <div class="step"><strong>1.</strong> During your shift, Auto Charge is enabled. All AMRs will move to the charging station during breaks.</div>
+    <div class="step"><strong>2.</strong> When team finishes early, at the end of your shift, if the AMRs are already above 80–85% SOC, do not need to plug them in; simply power them off.</div>
      </div>
 
   <!-- Shift 3 -->
   <div id="shift3Steps" class="hidden">
-    <div class="step"><strong>1.</strong> Currently, AMRs 1, 2, and 3 are configured for auto charging during break periods. </div> 
-    <div class="step"><strong>2.</strong> AMR 4 is not set up to auto charge at this time. Please ensure that only AMRs 1, 2, and 3 are used during breaks to maintain proper charging behavior.</div>
+    <div class="step"><strong>1.</strong>  During your shift, Auto Charge is enabled. All AMRs will move to the charging station during breaks. </div> 
+    <div class="step"><strong>2.</strong> When team finishes early, at the end of your shift, if the AMRs are already above 80–85% SOC, do not need to plug them in; simply power them off.</div>
   
 </div>
 </div>
@@ -687,6 +734,25 @@ h2 {
 
   </div>
 </div>
+
+<script>
+function showShutdownTab(tab) {
+  const tabs = ['normal', 'charging'];
+
+  tabs.forEach(t => {
+    const content = document.getElementById('tab-content-shutdown-' + t);
+    const btn = document.getElementById('tab-shutdown-' + t);
+    if (content) content.classList.add('hidden');
+    if (btn) btn.style.background = '';
+  });
+
+  const activeContent = document.getElementById('tab-content-shutdown-' + tab);
+  const activeBtn = document.getElementById('tab-shutdown-' + tab);
+
+  if (activeContent) activeContent.classList.remove('hidden');
+  if (activeBtn) activeBtn.style.background = '#d0e6ff';
+}
+</script>
 
 <script>
 function showOperationTab(tab) {
